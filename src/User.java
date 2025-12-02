@@ -13,6 +13,8 @@ public class User {
         setPassword(password);
     }
 
+
+
     public void post(String message){
         posts.add(message);
     }
@@ -34,6 +36,10 @@ public class User {
             ptr=ptr.next;
         }
     }
+    public void requests() {
+
+    }
+
 
     public String getName() {
         return name;
