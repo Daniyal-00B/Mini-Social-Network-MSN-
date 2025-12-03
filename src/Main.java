@@ -3,6 +3,7 @@ public class Main {
 
         User[] users = new User[100];
         int usrCount=0;
+
 //#########################(TEST ZONE)###########################
         users[0] = new User("TEST-01", 100, "PASS");
         users[1] = new User("TEST-02", 101, "PASS");
@@ -12,6 +13,9 @@ public class Main {
 
 //#########################(TEST ZONE)###########################
 
+        String text = "Enter User ID: ";
+        int num = GUI.getNum(text);
+        System.out.println(num);
 
     }
 }

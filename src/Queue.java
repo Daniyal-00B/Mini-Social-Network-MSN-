@@ -15,6 +15,10 @@ public class Queue {
         end = newNode;
     }
     public void pop() {
+        if (first == null) {
+            System.out.println("Queue is Empty");
+            return;
+        }
         Node ptr = first;
         first = ptr.next;
         ptr = null;
