@@ -1,14 +1,17 @@
 public class User {
 
-    private String name;
+    private String firstName;
+    private String lastName;
+    private String fullName;
     private int ID;
     private String password;
     List friends = new List();
     List posts = new List();
     Queue requests = new Queue();
 
-    User (String name, int ID, String password) {
-        setName(name);
+    User (String firstName, String lastName, int ID, String password) {
+        setFirstName(firstName);
+        setLastName(lastName);
         setID(ID);
         setPassword(password);
     }
@@ -32,7 +35,7 @@ public class User {
         Node ptr = friends.first;
         while (ptr!=null){
             User user = (User) ptr.data;
-            System.out.println(user.name);
+            System.out.println(user.fullName);
             ptr=ptr.next;
         }
     }
@@ -41,18 +44,26 @@ public class User {
     }
 
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
-    public void setName(String name) {
-        this.name = name;
+
+    public void setFullName() {
+        this.fullName = firstName + " " + lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public int getID() {
         return ID;
     }
     public void setID(int ID) {
-        this.ID = ID;
+        this.ID = 100 + ID;
     }
 
     public String getPassword() {
