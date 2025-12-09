@@ -26,6 +26,7 @@ public class User {
         friends.add(friend);
     }
     public void showPosts() {
+
         Node ptr = posts.first;
         while (ptr!=null){
             System.out.println(ptr.data);

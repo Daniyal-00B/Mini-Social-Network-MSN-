@@ -101,7 +101,7 @@ public class Main {
             choice = scanner.nextInt();
             switch (choice){
                 case 1 -> user.showFriends();
-                case 2 -> System.out.println();
+                case 2 -> {}
                 case 3 -> System.out.println();
                 case 4 -> System.out.println();
                 case 0 -> startMenu();
