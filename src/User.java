@@ -12,6 +12,7 @@ public class User {
     User (String firstName, String lastName, int ID, String password) {
         setFirstName(firstName);
         setLastName(lastName);
+        setFullName();
         setID(ID);
         setPassword(password);
     }
@@ -32,6 +33,10 @@ public class User {
         }
     }
     public void showFriends() {
+        if (friends.first==null) {
+            System.out.println("\nYour Friend List is Empty");
+            return;
+        }
         Node ptr = friends.first;
         while (ptr!=null){
             User user = (User) ptr.data;
@@ -49,7 +54,7 @@ public class User {
     }
 
     public void setFullName() {
-        this.fullName = firstName + " " + lastName;
+        fullName = firstName + " " + lastName;
     }
 
     public void setFirstName(String firstName) {
