@@ -2,6 +2,7 @@ public class Queue {
 
     Node first;
     Node end;
+    int count=0;
 
     public void add(Object x) {
         Node newNode = new Node();
@@ -13,15 +14,16 @@ public class Queue {
             end.next = newNode;
         }
         end = newNode;
+        count++;
     }
-    public void pop() {
-        if (first == null) {
-            System.out.println("Queue is Empty");
-            return;
-        }
+    public User pop() {
+        if (first == null) return null;
         Node ptr = first;
         first = ptr.next;
+        User user = (User) ptr.data;
         ptr = null;
+        count--;
+        return user;
     }
 
 }

@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class User {
 
     private String firstName;
@@ -19,31 +21,77 @@ public class User {
 
 
 
-    public void post(String message){
+    public void addRequest(User user){
+        requests.add(user);
+    }
+    public void showRequests(){
+        System.out.println("Total Requests: " + requests.count);
+        if (requests.count==0) return;
+        User user = requests.pop();
+        String yOrN="q";
+        Scanner scanner = new Scanner(System.in);
+        while (!(yOrN.equalsIgnoreCase("Y") || yOrN.equalsIgnoreCase("N"))){
+            System.out.println("You Have Friend Request From " + user.getFullName() +
+                    "Do You Accept it? (Y/N): ");
+            yOrN = scanner.next();
+        }
+        if (yOrN.equalsIgnoreCase("Y")){
+            addFriend(user);
+            user.addFriend(Main.users[getID()-100]);
+            System.out.println(user.getFullName() + " Added to Your Friend List🎉🎉");
+        }
+    }
+    public void addPost(String message){
         posts.add(message);
     }
     public void addFriend(Object friend) {
         friends.add(friend);
     }
     public void showPosts() {
-
+        Scanner scanner = new Scanner(System.in);
         Node ptr = posts.first;
+
         while (ptr!=null){
             System.out.println(ptr.data);
             ptr=ptr.next;
         }
+        if (posts.first==null) System.out.println("\nYou Have No Posts!");
+        System.out.print("Write a New Post or Leave it Blank: ");
+        String post = scanner.nextLine();
+        if (post.isEmpty()) return;
+        addPost(post);
     }
     public void showFriends() {
-        if (friends.first==null) {
-            System.out.println("\nYour Friend List is Empty");
-            return;
-        }
         Node ptr = friends.first;
+        Scanner scanner = new Scanner(System.in);
         while (ptr!=null){
             User user = (User) ptr.data;
             System.out.println(user.fullName);
             ptr=ptr.next;
         }
+        if (friends.first==null) System.out.println("\nYour Friend List is Empty");
+        System.out.print("For Adding New Friend Enter an ID or Leave it Blank: ");
+        String input = scanner.nextLine();
+        if (input.isEmpty()) return;
+        int id;
+        try{
+            id = Integer.parseInt(input);
+        }catch (Exception e){
+            System.out.println("\nInvalid Input!");
+            return;
+        }
+        User user;
+        try{
+            user = Main.users[id-100];
+        }catch (Exception e){
+            System.out.println("This User Does not Exist");
+            return;
+        }
+        if (user==null){
+            System.out.println("This User Does not Exist");
+            return;
+        }
+        user.addRequest(user);
     }
     public void requests() {
 
