@@ -10,6 +10,7 @@ public class User {
     List friends = new List();
     List posts = new List();
     Queue requests = new Queue();
+    List messages = new List();
 
     User (String firstName, String lastName, int ID, String password) {
         setFirstName(firstName);
@@ -25,20 +26,20 @@ public class User {
         requests.add(user);
     }
     public void showRequests(){
-        System.out.println("Total Requests: " + requests.count);
+        System.out.println("\nTotal Requests: " + requests.count);
         if (requests.count==0) return;
         User user = requests.pop();
         String yOrN="q";
         Scanner scanner = new Scanner(System.in);
         while (!(yOrN.equalsIgnoreCase("Y") || yOrN.equalsIgnoreCase("N"))){
-            System.out.println("You Have Friend Request From " + user.getFullName() +
-                    "Do You Accept it? (Y/N): ");
+            System.out.print("You Have a Friend Request From " + user.getFullName() +
+                    "\nDo You Accept it? (Y/N): ");
             yOrN = scanner.next();
         }
         if (yOrN.equalsIgnoreCase("Y")){
             addFriend(user);
             user.addFriend(Main.users[getID()-100]);
-            System.out.println(user.getFullName() + " Added to Your Friend List🎉🎉");
+            System.out.println("\n" + user.getFullName() + " Added to Your Friend List🎉🎉");
         }
     }
     public void addPost(String message){
@@ -47,16 +48,21 @@ public class User {
     public void addFriend(Object friend) {
         friends.add(friend);
     }
-    public void showPosts() {
+    public void showPosts(boolean isMe) {
         Scanner scanner = new Scanner(System.in);
         Node ptr = posts.first;
 
+        System.out.println("""
+                *************************
+                POSTS""");
         while (ptr!=null){
-            System.out.println(ptr.data);
+            System.out.println("---------------------\n" + ptr.data);
             ptr=ptr.next;
         }
+        System.out.println("*************************");
+        if (!isMe) return;
         if (posts.first==null) System.out.println("\nYou Have No Posts!");
-        System.out.print("Write a New Post or Leave it Blank: ");
+        System.out.print("Make a New Post or Leave it Blank: ");
         String post = scanner.nextLine();
         if (post.isEmpty()) return;
         addPost(post);
@@ -64,13 +70,24 @@ public class User {
     public void showFriends() {
         Node ptr = friends.first;
         Scanner scanner = new Scanner(System.in);
+        User friend;
+        int count = 0;
+        System.out.print("""
+                
+                *************************
+                      FRIENDS LIST
+                *************************
+                """);
         while (ptr!=null){
-            User user = (User) ptr.data;
-            System.out.println(user.fullName);
+            friend = (User) ptr.data;
+            System.out.println("      " + friend.getID() + ". " + friend.fullName + "\n-------------------------");
             ptr=ptr.next;
+            count++;
         }
+
         if (friends.first==null) System.out.println("\nYour Friend List is Empty");
-        System.out.print("For Adding New Friend Enter an ID or Leave it Blank: ");
+        System.out.println("Total Friends: " + count);
+        System.out.print("For Adding/Selecting Friend Enter an ID or Leave it Blank: ");
         String input = scanner.nextLine();
         if (input.isEmpty()) return;
         int id;
@@ -91,12 +108,35 @@ public class User {
             System.out.println("This User Does not Exist");
             return;
         }
-        user.addRequest(user);
+        if(isFriend(user)) {
+            user.info();
+            user.showPosts(false);
+        }
+        user.addRequest(Main.users[getID()-100]);
+        System.out.println("\nYour Friend Request Sent to User " + user.getID());
     }
-    public void requests() {
+    public boolean isFriend(User x) {
 
+        Node ptr = friends.first;
+        User user;
+        while (ptr!=null) {
+            user = (User) ptr.data;
+            if (x.getID()==user.getID()) return true;
+            ptr = ptr.next;
+        }
+        return false;
     }
 
+    public void info() {
+        String info = "First Name: " + getFirstName() +  "\nLast Name: " + getLastName()
+                + "\nID: " + getID() + "\n*************************";
+        System.out.println("""
+                           
+                           *************************
+                           User Info
+                           -------------------------
+                           """ + info);
+    }
 
     public String getFullName() {
         return fullName;
@@ -127,4 +167,11 @@ public class User {
         this.password = password;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 }

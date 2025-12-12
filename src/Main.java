@@ -73,7 +73,7 @@ public class Main {
         try{
             user = users[id - 100];
         }catch (Exception e){
-            System.out.println("\nInvalid Input!");
+            System.out.println("\nInvalid ID/Pass");
             startMenu();
         }
         if (user==null || !pass.equals(user.getPassword())){
@@ -93,17 +93,20 @@ public class Main {
                 
                 1. Friends
                 2. Post
-                3. Requests
-                4. My Info
+                3. Send Message
+                4. Requests
+                5. My Info
                 0. Logout
                 
-                Choose a Number:\s""");
+                Choose a Number""");
+            System.out.print(" " + user.getFirstName() + ": ");
             choice = scanner.nextInt();
             switch (choice){
                 case 1 -> user.showFriends();
-                case 2 -> user.showPosts();
-                case 3 -> System.out.println();
-                case 4 -> System.out.println();
+                case 2 -> user.showPosts(true);
+                case 3 -> {}
+                case 4 -> user.showRequests();
+                case 5 -> user.info();
                 case 0 -> startMenu();
                 default -> {
                     System.out.println("\nInvalid Input!");
