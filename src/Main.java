@@ -95,7 +95,7 @@ public class Main {
                 
                 1. Friends
                 2. Post
-                3. Send Message
+                3. Messaging
                 4. Requests
                 5. My Info
                 0. Logout

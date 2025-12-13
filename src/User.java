@@ -9,8 +9,9 @@ public class User {
     private String password;
     List friends = new List();
     List posts = new List();
-    Queue requests = new Queue();
     List messages = new List();
+    Queue requests = new Queue();
+
 
 
     User (String firstName, String lastName, int ID, String password) {
@@ -141,7 +142,46 @@ public class User {
     }
 
     public void chat() {
-        
+
+        Node ptr = messages.first;
+        if (ptr!=null) System.out.println("\n*********( New Messages )*********");
+        String message;
+        while (ptr!=null) {
+            message = (String)ptr.data;
+            System.out.println(message +  "\n----------------------------------");
+            messages.remove(message);
+            ptr = ptr.next;
+        }
+
+
+        System.out.print("Enter an ID to Start a Chat: ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        if (input.isEmpty()) return;
+        int id;
+        try{
+            id = Integer.parseInt(input);
+        }catch (Exception e){
+            System.out.println("\nInvalid Input");
+            return;
+        }
+        User user;
+        try {
+           user = Main.users[id-100];
+        }catch (Exception e){
+            System.out.println("\nThis User Does Not Exist");
+            return;
+        }
+        if (user==null) {
+            System.out.println("\nThis User Does Not Exist");
+            return;
+        }
+
+        System.out.print("Write a Message to User " + user.getID() + ": ");
+
+        message = scanner.nextLine();
+        message = "User (" + getID() + "):  " + message;
+        user.messages.add(message);
     }
 
 
