@@ -12,6 +12,7 @@ public class User {
     Queue requests = new Queue();
     List messages = new List();
 
+
     User (String firstName, String lastName, int ID, String password) {
         setFirstName(firstName);
         setLastName(lastName);
@@ -19,7 +20,6 @@ public class User {
         setID(ID);
         setPassword(password);
     }
-
 
 
     public void addRequest(User user){
@@ -42,11 +42,9 @@ public class User {
             System.out.println("\n" + user.getFullName() + " Added to Your Friend List🎉🎉");
         }
     }
+
     public void addPost(String message){
         posts.add(message);
-    }
-    public void addFriend(Object friend) {
-        friends.add(friend);
     }
     public void showPosts(boolean isMe) {
         Scanner scanner = new Scanner(System.in);
@@ -66,6 +64,10 @@ public class User {
         String post = scanner.nextLine();
         if (post.isEmpty()) return;
         addPost(post);
+    }
+
+    public void addFriend(Object friend) {
+        friends.add(friend);
     }
     public void showFriends() {
         Node ptr = friends.first;
@@ -138,40 +140,42 @@ public class User {
                            """ + info);
     }
 
-    public String getFullName() {
-        return fullName;
+    public void chat() {
+        
     }
 
-    public void setFullName() {
-        fullName = firstName + " " + lastName;
-    }
 
+
+    public void setID(int ID) {
+        this.ID = 100 + ID;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+    public void setFullName() {
+        fullName = firstName + " " + lastName;
+    }
+
 
     public int getID() {
         return ID;
     }
-    public void setID(int ID) {
-        this.ID = 100 + ID;
-    }
-
     public String getPassword() {
         return password;
     }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getFirstName() {
         return firstName;
     }
-
     public String getLastName() {
         return lastName;
+    }
+    public String getFullName() {
+        return fullName;
     }
 }

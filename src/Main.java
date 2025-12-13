@@ -17,6 +17,8 @@ public class Main {
         usrCount++;
         users[usrCount] = new User("User3", "Test3", usrCount, "pass");
         usrCount++;
+        users[usrCount] = new User("User4", "Test4", usrCount, "pass");
+        usrCount++;
 
         //#############################  TEST ZONE  ##################################
         startMenu();
@@ -104,13 +106,11 @@ public class Main {
             switch (choice){
                 case 1 -> user.showFriends();
                 case 2 -> user.showPosts(true);
-                case 3 -> {}
+                case 3 -> user.chat();
                 case 4 -> user.showRequests();
                 case 5 -> user.info();
                 case 0 -> startMenu();
-                default -> {
-                    System.out.println("\nInvalid Input!");
-                }
+                default -> System.out.println("\nInvalid Input!");
             }
         }
 
