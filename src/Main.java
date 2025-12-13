@@ -102,7 +102,12 @@ public class Main {
                 
                 Choose a Number""");
             System.out.print(" " + user.getFirstName() + ": ");
-            choice = scanner.nextInt();
+            try{
+                choice = scanner.nextInt();
+            }catch (Exception e) {
+                System.out.println("\nInvalid Input!");
+                userMenu(user);
+            }
             switch (choice){
                 case 1 -> user.showFriends();
                 case 2 -> user.showPosts(true);
