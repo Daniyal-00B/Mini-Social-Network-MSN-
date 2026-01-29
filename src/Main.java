@@ -51,6 +51,7 @@ public class Main {
         scanner.close();
     }
 
+
     public static void signup() {
         Scanner scanner = new Scanner(System.in);
         String firstName, lastName, password;
@@ -98,10 +99,11 @@ public class Main {
                 3. Messaging
                 4. Requests
                 5. My Info
-                0. Logout
+                -----------------
+                6. Common Friends
                 
                 Choose a Number""");
-            System.out.print(" " + user.getFirstName() + ": ");
+            System.out.print(" " + user.getFirstName() + " (0 for Exit): ");
 
             try{
                 choice = scanner.nextInt();
@@ -116,6 +118,21 @@ public class Main {
                 case 3 -> user.chat();
                 case 4 -> user.showRequests();
                 case 5 -> user.info();
+                case 6 -> {
+                    int myId = user.getID();
+                    int id;
+                    try {
+                        System.out.print("Common Friends With (ID): ");
+                        id = scanner.nextInt();
+                    } catch (Exception e) {
+                        System.out.println("\nInvalid Input!");
+                        return;
+                    }
+                    if (id>=200 || id<0) {
+                        System.out.println("\nInvalid Input!");
+                    }
+                    Graph.commonFriends(myId, id);
+                }
                 case 0 -> startMenu();
                 default -> System.out.println("\nInvalid Input!");
             }

@@ -69,6 +69,8 @@ public class User {
 
     public void addFriend(Object friend) {
         friends.add(friend);
+        User them = (User)friend;
+        Graph.graph[getID()-100][(them.getID())-100] = 1;
     }
     public void showFriends() {
         Node ptr = friends.first;
