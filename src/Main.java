@@ -180,7 +180,11 @@ public class Main {
                     }
                     if (id>=200 || id<0) {
                         System.out.println("\nInvalid Input!");
-                    }else Graph.commonFriends(myId, id);
+                    }else {
+                        myId-=100;
+                        id-=100;
+                        Graph.commonFriends(myId, id);
+                    }
                 }
                 case 7 -> {
                     System.out.print("\nEnter the Full Name: ");
