@@ -13,28 +13,28 @@ public class Main {
 
         //#############################  TEST ZONE  ##################################
 
-        users[usrCount] = new User("Mohsen", "Qa", usrCount, "pass");
+        users[usrCount] = new User("Mohsen", "Qa", usrCount, "pass"); //100 :ID
         usrTree.add(users[usrCount]);
         usrCount++;
-        users[usrCount] = new User("Reza", "Bu", usrCount, "pass");
+        users[usrCount] = new User("Reza", "Bu", usrCount, "pass"); //101
         usrTree.add(users[usrCount]);
         usrCount++;
-        users[usrCount] = new User("Sara", "Za", usrCount, "pass");
+        users[usrCount] = new User("Sara", "Za", usrCount, "pass"); //102
         usrTree.add(users[usrCount]);
         usrCount++;
-        users[usrCount] = new User("Bahar", "Nt", usrCount, "pass");
+        users[usrCount] = new User("Bahar", "Nt", usrCount, "pass"); //103
         usrTree.add(users[usrCount]);
         usrCount++;
-        users[usrCount] = new User("Yousef", "Tf", usrCount, "pass");
+        users[usrCount] = new User("Yousef", "Tf", usrCount, "pass"); //104
         usrTree.add(users[usrCount]);
         usrCount++;
-        users[usrCount] = new User("Arash", "Ks", usrCount, "pass");
+        users[usrCount] = new User("Arash", "Ks", usrCount, "pass"); //105
         usrTree.add(users[usrCount]);
         usrCount++;
-        users[usrCount] = new User("Mina", "Pz", usrCount, "pass");
+        users[usrCount] = new User("Mina", "Pz", usrCount, "pass"); //106
         usrTree.add(users[usrCount]);
         usrCount++;
-        users[usrCount] = new User("Narges", "Jo", usrCount, "pass");
+        users[usrCount] = new User("Narges", "Jo", usrCount, "pass"); //107
         usrTree.add(users[usrCount]);
         usrCount++;
 
@@ -76,7 +76,11 @@ public class Main {
                 return;
             }
             if (id1<100 || id2<100 || id1>=200 || id2>=200) System.out.println("\nInvalid Input");
-            else Graph.shortestPath(id1, id2);
+            else {
+                id1-=100;
+                id2-=100;
+                Graph.shortestPath(id1, id2);
+            }
             startMenu();
 
         }else {

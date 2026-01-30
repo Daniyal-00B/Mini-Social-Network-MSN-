@@ -16,14 +16,14 @@ public class Queue {
         end = newNode;
         count++;
     }
-    public User pop() {
+    public Object pop() {
         if (first == null) return null;
         Node ptr = first;
         first = ptr.next;
-        User user = (User) ptr.data;
+        Object value = ptr.data;
         ptr = null;
         count--;
-        return user;
+        return value;
     }
 
 }

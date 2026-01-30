@@ -29,7 +29,7 @@ public class User {
     public void showRequests(){
         System.out.println("\nTotal Requests: " + requests.count);
         if (requests.count==0) return;
-        User user = requests.pop();
+        User user = (User)requests.pop();
         String yOrN="q";
         Scanner scanner = new Scanner(System.in);
         while (!(yOrN.equalsIgnoreCase("Y") || yOrN.equalsIgnoreCase("N"))){

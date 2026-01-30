@@ -3,7 +3,7 @@ public class Graph {
     public static void commonFriends (int id1, int id2) {
         id1-=100;
         id2-=100;
-        int couter = 0;
+        int counter = 0;
         Node ptr = Main.users[id1].friends.first;
         System.out.println();
         while (ptr!=null) {
@@ -11,19 +11,40 @@ public class Graph {
             int id = friend.getID()-100;
             if (graph[id2][id]==1) {
                 System.out.println(friend.getFullName());
-                couter++;
+                counter++;
             }
             ptr=ptr.next;
         }
-        if (couter==0) {
+        if (counter==0) {
             System.out.println("There is No Common Friend With " + (id2+100));
         }
     }
 
     public static void shortestPath (int src, int dst) {
-
-        src-=100;
-        dst-=100;
-
+        int[] visited = new int[Main.usrCount];
+        int v=-1;
+        boolean isFirst = true;
+        String result = "";
+        Queue Q = new Queue();
+        Q.add(src);
+        visited[src] = 1;
+        while (Q.first!=null && v!=dst) {
+            v = (int)Q.pop();
+            if (isFirst) isFirst = false;
+            else result = (result + " -> " + (v+100));
+            for (int i=0; i<Main.usrCount; i++) {
+                if (graph[v][i]==1) {
+                    if (visited[i]==0) {
+                        Q.add(i);
+                        visited[i] = 1;
+                    }
+                }
+            }
+        }
+        if (v==dst) {
+            System.out.println("\nThe Shortest Link Between User " + (src+100)
+                               + " and User " + (dst+100) + " is:\n" + (src+100) + result);
+        }else System.out.println("\nThere is No Link Between This Users");
     }
 }
+
