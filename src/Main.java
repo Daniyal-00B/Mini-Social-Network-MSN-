@@ -4,20 +4,32 @@ public class Main {
 
     public static User[] users = new User[100];
     public static int usrCount=0;
+    public static Tree usrTree = new Tree();
+
 
 
     public static void main(String[] args) {
+
+
         //#############################  TEST ZONE  ##################################
 
-        users[usrCount] = new User("User0", "Test0", usrCount, "pass");
+        users[usrCount] = new User("Mohsen", "Qa", usrCount, "pass");
+        usrTree.add(users[usrCount]);
         usrCount++;
-        users[usrCount] = new User("User1", "Test1", usrCount, "pass");
+        users[usrCount] = new User("Reza", "Bu", usrCount, "pass");
+        usrTree.add(users[usrCount]);
         usrCount++;
-        users[usrCount] = new User("User2", "Test2", usrCount, "pass");
+        users[usrCount] = new User("Sara", "Za", usrCount, "pass");
+        usrTree.add(users[usrCount]);
         usrCount++;
-        users[usrCount] = new User("User3", "Test3", usrCount, "pass");
+        users[usrCount] = new User("Bahar", "Nt", usrCount, "pass");
+        usrTree.add(users[usrCount]);
         usrCount++;
-        users[usrCount] = new User("User4", "Test4", usrCount, "pass");
+        users[usrCount] = new User("Yousef", "Tf", usrCount, "pass");
+        usrTree.add(users[usrCount]);
+        usrCount++;
+        users[usrCount] = new User("Arash", "Ks", usrCount, "pass");
+        usrTree.add(users[usrCount]);
         usrCount++;
 
         //#############################  TEST ZONE  ##################################
@@ -30,13 +42,30 @@ public class Main {
                 
                 ***************************************************
                 Enter Your ID/Pass for Login or Press + for Sign Up
+                Press '=' for Sorting Users / Press '?' for Search
                 ***************************************************
-                User (ID/+):\s""");
+                User (ID/+/=/?):\s""");
         String choice = scanner.next();
 
-        if (choice.equalsIgnoreCase("+")) {
+        if (choice.equals("+")) {
             signup();
-        }else{
+        }else if (choice.equals("=")){
+
+            System.out.println("\nUsers Name Sorted By Alphabet\n-----------------------------");
+            usrTree.sort(usrTree.root);
+            startMenu();
+
+        }else if (choice.equals("?")){
+
+            System.out.print("\nEnter the Full Name: ");
+            scanner.nextLine();
+            String name = scanner.nextLine();
+            String info = usrTree.search(usrTree.root, name);
+            if (info==null) System.out.println("\n❌ Not Found");
+            else System.out.println(info);
+            startMenu();
+
+        } else{
             int id=0;
             try {
                 id = Integer.parseInt(choice);

@@ -19,4 +19,8 @@ public class Graph {
             System.out.println("There is No Common Friend With " + (id2+100));
         }
     }
+
+    public static void shortestPath (int src, int dst) {
+
+    }
 }
