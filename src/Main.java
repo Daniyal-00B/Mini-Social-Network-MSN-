@@ -31,6 +31,12 @@ public class Main {
         users[usrCount] = new User("Arash", "Ks", usrCount, "pass");
         usrTree.add(users[usrCount]);
         usrCount++;
+        users[usrCount] = new User("Mina", "Pz", usrCount, "pass");
+        usrTree.add(users[usrCount]);
+        usrCount++;
+        users[usrCount] = new User("Narges", "Jo", usrCount, "pass");
+        usrTree.add(users[usrCount]);
+        usrCount++;
 
         //#############################  TEST ZONE  ##################################
         startMenu();
@@ -42,30 +48,39 @@ public class Main {
                 
                 ***************************************************
                 Enter Your ID/Pass for Login or Press + for Sign Up
-                Press '=' for Sorting Users / Press '?' for Search
+                Press '=' for Sorting Users
+                or Press '?' for Finding Shortest Link Between Users
                 ***************************************************
                 User (ID/+/=/?):\s""");
         String choice = scanner.next();
 
         if (choice.equals("+")) {
             signup();
-        }else if (choice.equals("=")){
+        }else if (choice.equals("=")) {
 
             System.out.println("\nUsers Name Sorted By Alphabet\n-----------------------------");
             usrTree.sort(usrTree.root);
             startMenu();
 
-        }else if (choice.equals("?")){
+        }else if (choice.equals("?")) {
 
-            System.out.print("\nEnter the Full Name: ");
-            scanner.nextLine();
-            String name = scanner.nextLine();
-            String info = usrTree.search(usrTree.root, name);
-            if (info==null) System.out.println("\n❌ Not Found");
-            else System.out.println(info);
+            int id1, id2;
+            try{
+                System.out.print("\nFirst User ID: ");
+                id1 = scanner.nextInt();
+                System.out.print("Second User ID: ");
+                id2 = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("\nInvalid Input!");
+                startMenu();
+                return;
+            }
+            if (id1<100 || id2<100 || id1>=200 || id2>=200) System.out.println("\nInvalid Input");
+            else Graph.shortestPath(id1, id2);
             startMenu();
 
-        } else{
+        }else {
+
             int id=0;
             try {
                 id = Integer.parseInt(choice);
@@ -130,6 +145,7 @@ public class Main {
                 5. My Info
                 -----------------
                 6. Common Friends
+                7. Search
                 
                 Choose a Number""");
             System.out.print(" " + user.getFirstName() + " (0 for Exit): ");
@@ -155,12 +171,20 @@ public class Main {
                         id = scanner.nextInt();
                     } catch (Exception e) {
                         System.out.println("\nInvalid Input!");
-                        return;
+                        scanner.nextLine();
+                        break;
                     }
                     if (id>=200 || id<0) {
                         System.out.println("\nInvalid Input!");
-                    }
-                    Graph.commonFriends(myId, id);
+                    }else Graph.commonFriends(myId, id);
+                }
+                case 7 -> {
+                    System.out.print("\nEnter the Full Name: ");
+                    scanner.nextLine();
+                    String name = scanner.nextLine();
+                    String info = usrTree.search(usrTree.root, name);
+                    if (info==null) System.out.println("\n❌ Not Found");
+                    else System.out.println(info);
                 }
                 case 0 -> startMenu();
                 default -> System.out.println("\nInvalid Input!");

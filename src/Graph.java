@@ -22,5 +22,8 @@ public class Graph {
 
     public static void shortestPath (int src, int dst) {
 
+        src-=100;
+        dst-=100;
+
     }
 }
